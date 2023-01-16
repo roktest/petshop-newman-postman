@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "e51bfacb-97f8-4d74-b518-ebb0af39fbc7",
+		"name": "mock.server",
+		"description": "Simula un microservicio.\n\n- con esta request y con estos metodos devolveme esta respuesta.\n    \n\nEl microservicio es de creacion y obtencion de animales\n\n### POST /animals/create\n\n**Req Body**\n\n``` json\n{\n\"name\":  String,\n\"age\": int,\n\"isVegan\": boolean,\n\"isInSea\": boolean,\n\"color\": String\n}\n\n```\n\n**Res Body  \nStatus Code 201 Ok, created**\n\n``` json\n{\n\"idAnimal\": int\n}\n\n```\n\n### GET /animals/{idAnimal}\n\n**Res Body**\n\n``` json\n{\n\"id\": int,\n\"name\":  String,\n\"age\": int,\n\"isVegan\": boolean,\n\"isInSea\": boolean,\n\"color\": String\n}\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4886206"
+	},
+	"item": [
+		{
+			"name": "create an animal",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":  \"dog\",\r\n\"age\": 5,\r\n\"isVegan\": false,\r\n\"isInSea\": false,\r\n\"color\": \"silver\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockedURL}}/animal/create",
+					"host": [
+						"{{mockedURL}}"
+					],
+					"path": [
+						"animal",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create an animal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\":  \"dog\",\r\n\"age\": 5,\r\n\"isVegan\": false,\r\n\"isInSea\": false,\r\n\"color\": \"silver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mockedURL}}/animal/create",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"idAnimal\": 13241523\r\n}"
+				},
+				{
+					"name": "creation bad request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"age\": 5,\r\n\"isVegan\": false,\r\n\"isInSea\": false,\r\n\"color\": \"silver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mockedURL}}/animal/create",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal",
+								"create"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"error\": \"animal name required\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "get created animal (dog) by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{mockedURL}}/animal?idAnimal=13241523",
+					"host": [
+						"{{mockedURL}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "idAnimal",
+							"value": "13241523"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get created animal by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mockedURL}}/animal?idAnimal=13241523",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal"
+							],
+							"query": [
+								{
+									"key": "idAnimal",
+									"value": "13241523"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"dog\",\n    \"age\": 5,\n    \"isVegan\": false,\n    \"isInSea\": false,\n    \"color\": \"silver\"\n}"
+				},
+				{
+					"name": "get created animal with no id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mockedURL}}/animal?idAnimal",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal"
+							],
+							"query": [
+								{
+									"key": "idAnimal",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"404\",\n    \"message\": \"animal not found, please proide valid id\" \n}"
+				}
+			]
+		},
+		{
+			"name": "update an animal by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":  \"cat\",\r\n    \"age\": 5,\r\n    \"isVegan\": false,\r\n    \"isInSea\": false,\r\n    \"color\": \"black\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mockedURL}}/animal/update?idAnimal=13241523",
+					"host": [
+						"{{mockedURL}}"
+					],
+					"path": [
+						"animal",
+						"update"
+					],
+					"query": [
+						{
+							"key": "idAnimal",
+							"value": "13241523"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update an animal by id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":  \"cat\",\r\n    \"age\": 5,\r\n    \"isVegan\": false,\r\n    \"isInSea\": false,\r\n    \"color\": \"black\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mockedURL}}/animal/update?idAnimal=13241523",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal",
+								"update"
+							],
+							"query": [
+								{
+									"key": "idAnimal",
+									"value": "13241523"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"idAnimal\": 13241523,\n    \"name\":  \"cat\",\n    \"age\": 5,\n    \"isVegan\": false,\n    \"isInSea\": false,\n    \"color\": \"black\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get updated animal (dog to cat) by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{mockedURL}}/animal?idAnimal=13241523",
+					"host": [
+						"{{mockedURL}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "idAnimal",
+							"value": "13241523"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get created animal by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mockedURL}}/animal?idAnimal=13241523",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal"
+							],
+							"query": [
+								{
+									"key": "idAnimal",
+									"value": "13241523"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"cat\",\n    \"age\": 5,\n    \"isVegan\": false,\n    \"isInSea\": false,\n    \"color\": \"black\"\n}"
+				},
+				{
+					"name": "get created animal with no id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mockedURL}}/animal?idAnimal",
+							"host": [
+								"{{mockedURL}}"
+							],
+							"path": [
+								"animal"
+							],
+							"query": [
+								{
+									"key": "idAnimal",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"please provide an animal id\"\n}"
+				}
+			]
+		}
+	]
+}
