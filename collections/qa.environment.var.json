@@ -1,0 +1,63 @@
+{
+	"id": "7691d312-0fcd-4f79-a9ab-fe7598a49768",
+	"name": "qa",
+	"values": [
+		{
+			"key": "id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "petId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "shipDate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "userName",
+			"value": "El Foka",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "firstName",
+			"value": "rodrigo",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "lastName",
+			"value": "katz",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "email",
+			"value": "rodrigo@email.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "pass",
+			"value": "Rodrigo123",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "phone",
+			"value": "1161231234",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-01-14T18:55:48.839Z",
+	"_postman_exported_using": "Postman/10.8.1"
+}

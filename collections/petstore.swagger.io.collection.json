@@ -1,0 +1,838 @@
+{
+	"info": {
+		"_postman_id": "c66b89a2-07bf-4c39-a966-9250bce01c72",
+		"name": "petstore.swagger.io",
+		"description": "StartFragment\n\nThis is a sample server Petstore server.\n\n[https://petstore.swagger.io/](https://petstore.swagger.io/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4886206"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/{{userName}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/login?username={{userName}}&password={{pass}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{userName}}"
+								},
+								{
+									"key": "password",
+									"value": "{{pass}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/logout",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test get the body request with no null values\", ()=>{\r",
+									"    pm.expect(JSON.parse(pm.request.body).id).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).username).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).firstName).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).lastName).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).email).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).password).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).phone).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body).userStatus).is.not.null;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"username\": \"{{userName}}\",\r\n  \"firstName\": \"{{firstName}}\",\r\n  \"lastName\": \"{{lastName}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{pass}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"userStatus\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "creates list of users - createWithArray",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/createWithArray",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"createWithArray"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "creates list of users - createWithList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/createWithList",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/{{userName}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test status code 200\", ()=>{\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"username\": \"{{userName}}\",\r\n  \"firstName\": \"{{firstName}}\",\r\n  \"lastName\": \"{{lastName}}\",\r\n  \"email\": \"juancar@email.com\",\r\n  \"password\": \"{{pass}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"userStatus\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/user/{{userName}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"user",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "store",
+			"item": [
+				{
+					"name": "get store inventory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Available pets to be adopted on store\", ()=>{\r",
+									"    pm.expect(pm.response.json().available).to.be.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/inventory",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get store order by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order/{{id}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete store order by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order/{{id}}",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - placed, false",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    // obviamente la linea que sigue la saque de stackoverflow... jeje\r",
+									"    return new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test response status field is placed\", () => {\r",
+									"    pm.expect(pm.response.json().status).to.be.eql(\"placed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response complete field is false\", () => {\r",
+									"    pm.expect(pm.response.json().complete).to.be.eql(false);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response status code 200\", () => {\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response status code 200\", () => {\r",
+									"    pm.expect(pm.response.code).to.be.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test Order ID should be on the request\", ()=>{\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).id).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).id).to.be.eql(pm.environment.get(\"id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test Pet ID should be on the request\", ()=>{\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).petId).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).petId).to.be.eql(pm.environment.get(\"petId\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test Quantity should be greater than 0 on the request\", ()=>{\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).quantity).is.not.null;\r",
+									"    pm.expect(JSON.parse(pm.request.body.raw).quantity).to.be.greaterThan(0);\r",
+									"    pm.expect(parseInt(JSON.parse(pm.request.body.raw).quantity)).to.be.greaterThan(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"placed\",\r\n  \"complete\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - placed, true",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    return new Date(year + '-' + zeroPad((month+1), 2) + '-' + zeroPad(day, 2) + 'T' + zeroPad(hours, 2) + ':' + zeroPad(minutes, 2) + ':' + zeroPad(seconds, 2)).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - approved, false",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    return new Date(year + '-' + zeroPad((month+1), 2) + '-' + zeroPad(day, 2) + 'T' + zeroPad(hours, 2) + ':' + zeroPad(minutes, 2) + ':' + zeroPad(seconds, 2)).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"approved\",\r\n  \"complete\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - approved, true",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    return new Date(year + '-' + zeroPad((month+1), 2) + '-' + zeroPad(day, 2) + 'T' + zeroPad(hours, 2) + ':' + zeroPad(minutes, 2) + ':' + zeroPad(seconds, 2)).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"approved\",\r\n  \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - delivered , false",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    return new Date(year + '-' + zeroPad((month+1), 2) + '-' + zeroPad(day, 2) + 'T' + zeroPad(hours, 2) + ':' + zeroPad(minutes, 2) + ':' + zeroPad(seconds, 2)).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"delivered\",\r\n  \"complete\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				},
+				{
+					"name": "post store order - delivered , true",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function zeroPad(num, places) {\r",
+									"     return String(num).padStart(places, '0');\r",
+									"}\r",
+									"\r",
+									"function setId() {\r",
+									"  return Math.floor(Math.random() * (1, 99999999999) + 1);\r",
+									"}\r",
+									"\r",
+									"function setShipDate(){\r",
+									"    let date = new Date();\r",
+									"    let year = date.getFullYear();\r",
+									"    let month = date.getMonth();\r",
+									"    let day = date.getDate();\r",
+									"    let hours = date.getHours();\r",
+									"    let minutes = date.getMinutes();\r",
+									"    let seconds = date.getSeconds();\r",
+									"    return new Date(year + '-' + zeroPad((month+1), 2) + '-' + zeroPad(day, 2) + 'T' + zeroPad(hours, 2) + ':' + zeroPad(minutes, 2) + ':' + zeroPad(seconds, 2)).toISOString();\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"id\", setId());\r",
+									"pm.environment.set(\"petId\", setId());\r",
+									"pm.environment.set(\"shipDate\", setShipDate());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{ONE}},\r\n  \"shipDate\": \"{{shipDate}}\",\r\n  \"status\": \"delivered\",\r\n  \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{petstore.swagger.io.url}}/{{petstore.swagger.io.api.version}}/store/order",
+							"host": [
+								"{{petstore.swagger.io.url}}"
+							],
+							"path": [
+								"{{petstore.swagger.io.api.version}}",
+								"store",
+								"order"
+							]
+						},
+						"description": "Order placed for purchasing the pet  \nExample value\n\n``` json\n{\n  \"id\": 123123123,\n  \"petId\": 123,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"placed\",\n  \"complete\": false\n}\n{\n  \"id\": 213213213,\n  \"petId\": 213,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"approved\",\n  \"complete\": false\n}\n{\n  \"id\": 321321321,\n  \"petId\": 321,\n  \"quantity\": 1,\n  \"shipDate\": \"2023-01-14T10:40:25.091Z\",\n  \"status\": \"delivered\",\n  \"complete\": true\n}\n\n```\n\n| name | value |\n| --- | --- |\n| id | integer($int64) |\n| petId | integer($int64 |\n| quantity | integer($int32) |\n| shipDate | string($date-time) |\n| status | string enum \\[ placed, approved, delivered \\] |\n| complete | boolean |"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pet",
+			"item": []
+		}
+	]
+}

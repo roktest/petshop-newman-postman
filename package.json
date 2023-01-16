@@ -1,0 +1,25 @@
+{
+  "name": "newman-postman",
+  "version": "1.0.0",
+  "description": "newman and postman project",
+  "main": "app.js",
+  "scripts": {
+    "test:json": "newman run collections/petstore.swagger.io.collection.json -e collections/qa.environment.var.json -g collections/globals.var.json",
+    "test:link": "newman run https://api.postman.com/collections/4886206-c66b89a2-07bf-4c39-a966-9250bce01c72?access_key=PMAT-01GPRTSZY9GTD7H2ZN7PDVMBW4 -e collections/qa.environment.var.json -g collections/globals.var.json",
+    "test:jsonHtml": "newman run collections/petstore.swagger.io.collection.json -e collections/qa.environment.var.json -g collections/globals.var.json -r html",
+    "test:linkHtml": "newman run https://api.postman.com/collections/4886206-c66b89a2-07bf-4c39-a966-9250bce01c72?access_key=PMAT-01GPRTSZY9GTD7H2ZN7PDVMBW4 -e collections/qa.environment.var.json -g collections/globals.var.json -r html",
+    "test:jsonHtmlExtra": "newman run collections/petstore.swagger.io.collection.json -e collections/qa.environment.var.json -g collections/globals.var.json -r htmlextra",
+    "test:linkHtmlExtra": "newman run https://api.postman.com/collections/4886206-c66b89a2-07bf-4c39-a966-9250bce01c72?access_key=PMAT-01GPRTSZY9GTD7H2ZN7PDVMBW4 -e collections/qa.environment.var.json -g collections/globals.var.json -r htmlextra"
+  },
+  "keywords": [
+    "newman",
+    "postman"
+  ],
+  "author": "rodrigo katz",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^5.3.2",
+    "newman-reporter-html": "^1.0.5",
+    "newman-reporter-htmlextra": "^1.22.11"
+  }
+}
