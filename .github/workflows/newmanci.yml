@@ -30,4 +30,4 @@ jobs:
     #- run: npm run build --if-present
     #- run: npm test
     - name: my-step
-      run: echo "Hello World!"
+      run: exit 1
