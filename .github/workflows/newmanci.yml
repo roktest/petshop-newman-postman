@@ -20,4 +20,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install newman newman-reporter-html newman-reporter-htmlextra -d --force
-    - run: npm run test:jsonHtmlExtra
+    - run: npm run test:json
